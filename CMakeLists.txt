@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.13)
 
-set(PROJECT_NAME opengl_example)
+set(PROJECT_NAME "opengl_circle")
 set(CMAKE_CXX_STANDARD 17)
 
-set(WINDOW_NAME "Opengl Example")
-set(WINDOW_WIDTH 960)
-set(WINDOW_HEIGHT 540)
+set(WINDOW_NAME "OpenGL Circle")
+set(WINDOW_WIDTH 512)
+set(WINDOW_HEIGHT 512)
 
 project(${PROJECT_NAME})
 add_executable(${PROJECT_NAME}
@@ -16,6 +16,8 @@ add_executable(${PROJECT_NAME}
       src/context.cpp src/context.h
       src/buffer.cpp src/buffer.h
       src/vertex_layout.cpp src/vertex_layout.h
+      src/image.cpp src/image.h
+      src/texture.cpp src/texture.h
       )
 
 include(Dependency.cmake)

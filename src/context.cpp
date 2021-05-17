@@ -91,7 +91,7 @@ bool Context::Init() {
     if (!m_textureProgram)
     return false;
 
-    m_postProgram = Program::Create("./shader/texture.vs","./shader/invert.fs");
+    m_postProgram = Program::Create("./shader/texture.vs","./shader/gamma.fs");
     if (!m_postProgram)
     return false;
 
@@ -137,6 +137,8 @@ void Context::Render() {
         if(ImGui::ColorEdit4("clear color", glm::value_ptr(m_clearColor))) {
             glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
         }
+
+         ImGui::DragFloat("gamma", &m_gamma, 0.01f, 0.0f, 2.0f);
          ImGui::Separator();
          ImGui::DragFloat3("camera pos", glm::value_ptr(m_cameraPos), 0.01f);
          ImGui::DragFloat("camera yaw", &m_cameraYaw, 0.5f);
@@ -287,5 +289,6 @@ void Context::Render() {
         glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f)));
     m_framebuffer->GetColorAttachment()->Bind();
     m_postProgram->SetUniform("tex", 0);
+    m_postProgram->SetUniform("gamma", m_gamma);
     m_plane->Draw(m_postProgram.get());    
 }
